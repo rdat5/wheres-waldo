@@ -1,6 +1,7 @@
 import "./styles/style.css";
 import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
+import Submit from "./components/Submit";
 import wimm_img from "./placeholder/rp5nr2zzvio31.jpg";
 import finn_img from "./placeholder/finn_new.png";
 import rocko_img from "./placeholder/rocko_new.png";
@@ -33,6 +34,7 @@ function App() {
         </div>
       </div>
       <HighScores/>
+      <Submit/>
     </div>
   )
 }
