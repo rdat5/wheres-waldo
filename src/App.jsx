@@ -20,6 +20,7 @@ function App() {
             <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
             <button className="button is-link">View High Scores</button>
             <button className="button is-success">Submit High Score</button>
+            <p className="is-size-5">Score: <em>{20.12}s</em></p>
           </div>
           {/* Characters */}
           <p className="has-background-info-light py-5 has-text-centered">Directions: Find these {3} characters in the image:</p>
