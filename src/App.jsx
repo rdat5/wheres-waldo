@@ -19,6 +19,7 @@ function App() {
             <p className="subtitle is-6 mb-2">Find the hidden characters!</p>
             <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
             <button className="button is-link">View High Scores</button>
+            <button className="button is-success">Submit High Score</button>
           </div>
           {/* Characters */}
           <p className="has-background-info-light py-5 has-text-centered">Directions: Find these {3} characters in the image:</p>
