@@ -1,11 +1,11 @@
-function HighScores() {
+function HighScores( { isActive, setIsActive } ) {
     return (
-        <div className="modal">
+        <div className={`modal ${isActive ? 'is-active' : ''}`}>
             <div className="modal-background"></div>
             <div className="modal-card">
             <header className="modal-card-head">
                 <p className="modal-card-title">High Scores</p>
-                <button className="delete" aria-label="close"></button>
+                <button className="delete" aria-label="close" onClick={() => setIsActive(false)}></button>
             </header>
             <section className="modal-card-body">
                 <div className="table-container">
