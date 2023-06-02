@@ -10,11 +10,16 @@ import stan_img from "./placeholder/stan_new.png";
 
 function App() {
   const [isViewModalActive, setIsViewScoreActive] = useState(false);
-
+  const [isSubmitModalActive, setIsSubmitModalActive] = useState(false);
   
   function onViewHighScoreClick() {
     console.log('view high score.');
     setIsViewScoreActive(true);
+  }
+
+  function onSubmitHighScoreClick() {
+    console.log('submit high score.');
+    setIsSubmitModalActive(true);
   }
 
   return (
@@ -28,7 +33,7 @@ function App() {
             <p className="subtitle is-6 mb-2">Find the hidden characters!</p>
             <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
             <button className="button is-link" onClick={onViewHighScoreClick}>View High Scores</button>
-            <button className="button is-success">Submit High Score</button>
+            <button className="button is-success" onClick={onSubmitHighScoreClick}>Submit High Score</button>
             <p className="is-size-5">Score: <em>{20.12}s</em></p>
           </div>
           {/* Characters */}
@@ -45,7 +50,7 @@ function App() {
         </div>
       </div>
       <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive}/>
-      <Submit/>
+      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive}/>
     </div>
   )
 }
