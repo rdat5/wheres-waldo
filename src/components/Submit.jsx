@@ -5,7 +5,6 @@ function Submit( { isActive, setIsActive } ) {
             <div className="modal-card">
                 <header className="modal-card-head">
                     <p className="modal-card-title">Submit High Score</p>
-                    <button className="delete" aria-label="close" onClick={() => setIsActive(false)}></button>
                 </header>
                 <section className="modal-card-body">
                     <div className="field">
@@ -25,7 +24,7 @@ function Submit( { isActive, setIsActive } ) {
                 </section>
                 <footer className="card-footer">
                     <button className="button card-footer-item is-success">Submit</button>
-                    <button className="button card-footer-item is-danger">Cancel</button>
+                    <button className="button card-footer-item is-danger" onClick={() => setIsActive(false)}>Cancel</button>
                 </footer>
             </div>
         </div>
