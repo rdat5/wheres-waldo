@@ -1,3 +1,5 @@
+import ScoreListItem from "./ScoreListItem";
+
 function HighScores( { isActive, setIsActive } ) {
     return (
         <div className={`modal ${isActive ? 'is-active' : ''}`}>
@@ -18,26 +20,11 @@ function HighScores( { isActive, setIsActive } ) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th>1</th>
-                                <td>Test</td>
-                                <td>20.24s</td>
-                            </tr>
-                            <tr>
-                                <th>2</th>
-                                <td>Test2</td>
-                                <td>10.54s</td>
-                            </tr>
-                            <tr>
-                                <th>3</th>
-                                <td>Test3</td>
-                                <td>10.54s</td>
-                            </tr>
-                            <tr>
-                                <th>4</th>
-                                <td>Test4</td>
-                                <td>10.54s</td>
-                            </tr>
+                            <ScoreListItem position={1} name="Test1" score={10.00}/>
+                            <ScoreListItem position={2} name="Test2" score={10.01}/>
+                            <ScoreListItem position={3} name="Test3" score={10.02}/>
+                            <ScoreListItem position={4} name="Test4" score={10.03}/>
+                            <ScoreListItem position={5} name="Test5" score={10.04}/>
                         </tbody>
                     </table>
                 </div>
