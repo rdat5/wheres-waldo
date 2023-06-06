@@ -2,6 +2,7 @@ import { useState } from 'react';
 import "./styles/style.css";
 import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
+import Dropdown from './components/DropDown';
 import Submit from "./components/Submit";
 import wimm_img from "./placeholder/rp5nr2zzvio31.jpg";
 import finn_img from "./placeholder/finn_new.png";
@@ -46,6 +47,7 @@ function App() {
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
+          <Dropdown/>
           <img src={wimm_img} alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" className="pure-img p-0" />
         </div>
       </div>
