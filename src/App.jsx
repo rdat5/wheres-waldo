@@ -4,7 +4,7 @@ import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
 import Dropdown from './components/DropDown';
 import Submit from "./components/Submit";
-import wimm_img from "./placeholder/rp5nr2zzvio31.jpg";
+import data from "./placeholder/data.json";
 import finn_img from "./placeholder/finn_new.png";
 import rocko_img from "./placeholder/rocko_new.png";
 import stan_img from "./placeholder/stan_new.png";
@@ -40,15 +40,15 @@ function App() {
           {/* Characters */}
           <p className="has-background-info-light py-5 has-text-centered">Directions: Find these {3} characters in the image:</p>
           <div className="container p-4">
-            <CharacterCard charData={{name: "Finn", img: finn_img, origin: "Adventure Time"}}/>
-            <CharacterCard charData={{name: "Rocko", img: rocko_img, origin: "Rocko's Modern Life"}}/>
-            <CharacterCard charData={{name: "Grunkle Stan", img: stan_img, origin: "Gravity Falls"}}/>
+            {
+              data.hidden_objs.map((char) => <CharacterCard key={char.id} charData={char}/>)
+            }
           </div>
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
           <Dropdown/>
-          <img src={wimm_img} alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" className="pure-img p-0" />
+          <img src={data.wimmel_img} alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" className="pure-img p-0" />
         </div>
       </div>
       <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive}/>
