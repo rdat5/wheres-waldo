@@ -1,4 +1,4 @@
-function Dropdown( { charData } ) {
+function Dropdown( { charData, isActive, setIsActive } ) {
     const dropdownStyle = {
         position: 'absolute',
         top: '200px',
@@ -6,7 +6,7 @@ function Dropdown( { charData } ) {
     }
 
     return (
-        <div className="dropdown is-active" style={dropdownStyle}>
+        <div className={`dropdown ${isActive ? 'is-active' : ''}`} style={dropdownStyle}>
             <div className="dropdown-menu">
                 <div className="dropdown-content">
                     {
