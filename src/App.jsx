@@ -5,9 +5,6 @@ import HighScores from "./components/HighScores";
 import Dropdown from './components/DropDown';
 import Submit from "./components/Submit";
 import data from "./placeholder/data.json";
-import finn_img from "./placeholder/finn_new.png";
-import rocko_img from "./placeholder/rocko_new.png";
-import stan_img from "./placeholder/stan_new.png";
 
 function App() {
   const [isViewModalActive, setIsViewScoreActive] = useState(false);
@@ -47,7 +44,7 @@ function App() {
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
-          <Dropdown/>
+          <Dropdown charData={data.hidden_objs}/>
           <img src={data.wimmel_img} alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" className="pure-img p-0" />
         </div>
       </div>

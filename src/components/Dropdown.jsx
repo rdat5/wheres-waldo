@@ -1,4 +1,4 @@
-function Dropdown() {
+function Dropdown( { charData } ) {
     const dropdownStyle = {
         position: 'absolute',
         top: '200px',
@@ -9,15 +9,14 @@ function Dropdown() {
         <div className="dropdown is-active" style={dropdownStyle}>
             <div className="dropdown-menu">
                 <div className="dropdown-content">
-                    <div className="dropdown-item">
-                        <button className="button is-fullwidth">Finn</button>
-                    </div>
-                    <div className="dropdown-item">
-                        <button className="button is-fullwidth">Rocko</button>
-                    </div>
-                    <div className="dropdown-item">
-                        <button className="button is-fullwidth">Grunkle Stan</button>
-                    </div>
+                    {
+                        charData.map((char) =>
+                            <div className="dropdown-item level is-clickable" key={char.id}>
+                                <img src={char.img} alt="" className="image is-64x64" />
+                                <p>{char.name}</p>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>

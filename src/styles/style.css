@@ -1,1 +1,11 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+
+.is-clickable {
+    cursor: pointer;
+}
+
+.is-clickable:hover {
+    filter:brightness(120%);
+    background-color: pink;
+    font-weight: bold;
+}
