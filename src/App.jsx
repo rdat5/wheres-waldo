@@ -47,7 +47,14 @@ function App() {
         {/* Wimmelbilder */}
         <div className="column p-0">
           <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation}/>
-          <img src={data.wimmel_img} alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" className="pure-img p-0" onClick={() => setIsCharModalActive(!isCharModalActive)}/>
+          <img src={data.wimmel_img} 
+            alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" 
+            className="pure-img p-0" 
+            onClick={(e) => {
+                setIsCharModalActive(!isCharModalActive);
+                setClickLocation({x: e.pageX, y:e.pageY});
+              }
+            }/>
         </div>
       </div>
       <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive}/>
