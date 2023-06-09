@@ -10,6 +10,7 @@ function App() {
   const [isViewModalActive, setIsViewScoreActive] = useState(false);
   const [isSubmitModalActive, setIsSubmitModalActive] = useState(false);
   const [isCharModalActive, setIsCharModalActive] = useState(false);
+  const [clickLocation, setClickLocation] = useState({x: 850, y:340});
   
   function onViewHighScoreClick() {
     console.log('view high score.');
@@ -45,7 +46,7 @@ function App() {
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
-          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive}/>
+          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation}/>
           <img src={data.wimmel_img} alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" className="pure-img p-0" onClick={() => setIsCharModalActive(!isCharModalActive)}/>
         </div>
       </div>

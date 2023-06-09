@@ -1,8 +1,8 @@
-function Dropdown( { charData, isActive, setIsActive } ) {
+function Dropdown( { charData, isActive, setIsActive, clickLoc } ) {
     const dropdownStyle = {
         position: 'absolute',
-        top: '200px',
-        left: '620px'
+        left: `${clickLoc.x}px`,
+        top: `${clickLoc.y}px`
     }
 
     return (
