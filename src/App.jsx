@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import "./styles/style.css";
 import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
@@ -10,8 +10,10 @@ function App() {
   const [isViewModalActive, setIsViewScoreActive] = useState(false);
   const [isSubmitModalActive, setIsSubmitModalActive] = useState(false);
   const [isCharModalActive, setIsCharModalActive] = useState(false);
-  const [clickLocation, setClickLocation] = useState({x: 850, y:340});
-  
+  const [clickLocation, setClickLocation] = useState({x: 0, y:0});
+  const [isShifted, setIsShifted] = useState(false);
+  const imageRef = useRef(null);
+
   function onViewHighScoreClick() {
     console.log('view high score.');
     setIsViewScoreActive(true);
@@ -20,6 +22,17 @@ function App() {
   function onSubmitHighScoreClick() {
     console.log('submit high score.');
     setIsSubmitModalActive(true);
+  }
+
+  function isRightHalf(elem, clickLocX) {
+    const {left, width} = elem.getBoundingClientRect();
+    const imageCenter = left + width / 2;
+
+    if (clickLocX < imageCenter) {
+      return false;
+    }
+
+    return true;
   }
 
   return (
@@ -46,13 +59,18 @@ function App() {
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
-          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation}/>
-          <img src={data.wimmel_img} 
+          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted}/>
+          <img 
+            src={data.wimmel_img} 
+            ref={imageRef}
             alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" 
             className="pure-img p-0" 
             onClick={(e) => {
-                setIsCharModalActive(!isCharModalActive);
-                setClickLocation({x: e.pageX, y:e.pageY});
+              if (imageRef.current) {
+                  setIsCharModalActive(!isCharModalActive);
+                  setClickLocation({x: e.pageX, y:e.pageY});
+                  setIsShifted(isRightHalf(imageRef.current, e.pageX));
+                }
               }
             }/>
         </div>

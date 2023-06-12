@@ -1,12 +1,16 @@
-function Dropdown( { charData, isActive, setIsActive, clickLoc } ) {
+import { useRef } from "react";
+
+function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted } ) {
+    const dropDownRef = useRef(null);
+
     const dropdownStyle = {
         position: 'absolute',
-        left: `${clickLoc.x + 10}px`,
+        left: `${clickLoc.x + (isShifted ? (-200) : 10)}px`,
         top: `${clickLoc.y + 10}px`
     }
 
     return (
-        <div className={`dropdown ${isActive ? 'is-active' : ''}`} style={dropdownStyle}>
+        <div ref={dropDownRef} className={`dropdown ${isActive ? 'is-active' : ''}`} style={dropdownStyle}>
             <div className="dropdown-menu">
                 <div className="dropdown-content">
                     {
