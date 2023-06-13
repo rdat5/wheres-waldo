@@ -1,12 +1,12 @@
 import { useRef } from "react";
 
-function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted } ) {
+function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted, isBottomShift } ) {
     const dropDownRef = useRef(null);
 
     const dropdownStyle = {
         position: 'absolute',
         left: `${clickLoc.x + (isShifted ? (-200) : 10)}px`,
-        top: `${clickLoc.y + 10}px`
+        top: `${clickLoc.y + (isBottomShift ? (-300) : 10)}px`
     }
 
     return (

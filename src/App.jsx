@@ -12,6 +12,7 @@ function App() {
   const [isCharModalActive, setIsCharModalActive] = useState(false);
   const [clickLocation, setClickLocation] = useState({x: 0, y:0});
   const [isShifted, setIsShifted] = useState(false);
+  const [isBottomShifted, setIsBottomShifted] = useState(false);
   const imageRef = useRef(null);
 
   function onViewHighScoreClick() {
@@ -29,6 +30,17 @@ function App() {
     const imageCenter = left + width / 2;
 
     if (clickLocX < imageCenter) {
+      return false;
+    }
+
+    return true;
+  }
+
+  function isBottomHalf(elem, clickLocY) {
+    const {top, height} = elem.getBoundingClientRect();
+    const imageCenter = top + height / 2;
+
+    if (clickLocY < imageCenter) {
       return false;
     }
 
@@ -59,7 +71,7 @@ function App() {
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
-          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted}/>
+          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted} isBottomShift={isBottomShifted}/>
           <img 
             src={data.wimmel_img} 
             ref={imageRef}
@@ -70,6 +82,7 @@ function App() {
                   setIsCharModalActive(!isCharModalActive);
                   setClickLocation({x: e.pageX, y:e.pageY});
                   setIsShifted(isRightHalf(imageRef.current, e.pageX));
+                  setIsBottomShifted(isBottomHalf(imageRef.current, e.pageY));
                 }
               }
             }/>
