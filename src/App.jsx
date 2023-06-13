@@ -11,6 +11,7 @@ function App() {
   const [isSubmitModalActive, setIsSubmitModalActive] = useState(false);
   const [isCharModalActive, setIsCharModalActive] = useState(false);
   const [clickLocation, setClickLocation] = useState({x: 0, y:0});
+  const [clickedCoords, setClickedCoords] = useState({x: 0, y:0});
   const [isShifted, setIsShifted] = useState(false);
   const [isBottomShifted, setIsBottomShifted] = useState(false);
   const imageRef = useRef(null);
@@ -47,6 +48,16 @@ function App() {
     return true;
   }
 
+  function getCoordinates(elem, e) {
+    const rect = elem.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const normalizedX = (x / rect.width).toFixed(3);
+    const normalizedY = (y / rect.height).toFixed(3);
+
+    return {x: normalizedX, y: normalizedY};
+  }
+
   return (
     <div className="has-background-white">
       <div className="columns m-0">
@@ -81,6 +92,7 @@ function App() {
               if (imageRef.current) {
                   setIsCharModalActive(!isCharModalActive);
                   setClickLocation({x: e.pageX, y:e.pageY});
+                  setClickedCoords(getCoordinates(imageRef.current, e));
                   setIsShifted(isRightHalf(imageRef.current, e.pageX));
                   setIsBottomShifted(isBottomHalf(imageRef.current, e.pageY));
                 }
