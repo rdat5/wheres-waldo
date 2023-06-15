@@ -52,8 +52,8 @@ function App() {
     const rect = elem.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const normalizedX = (x / rect.width).toFixed(3);
-    const normalizedY = (y / rect.height).toFixed(3);
+    const normalizedX = Number((x / rect.width).toPrecision(3));
+    const normalizedY = Number((y / rect.height).toPrecision(3));
 
     return {x: normalizedX, y: normalizedY};
   }
