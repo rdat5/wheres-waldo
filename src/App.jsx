@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import "./styles/style.css";
 import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
@@ -14,7 +14,23 @@ function App() {
   const [clickedCoords, setClickedCoords] = useState({x: 0, y:0});
   const [isShifted, setIsShifted] = useState(false);
   const [isBottomShifted, setIsBottomShifted] = useState(false);
+  const [characterData, setCharacterData] = useState([]);
   const imageRef = useRef(null);
+
+  useEffect(() => {
+    // Load characters
+    const newCharData = data.hidden_objs.map(char => (
+        {
+          id: char.id,
+          name: char.name,
+          img: char.img,
+          origin: char.origin,
+          hitbox: char.hitbox,
+          isFound: false
+        }
+      ));
+    setCharacterData(newCharData);
+  }, [])
 
   function onViewHighScoreClick() {
     console.log('view high score.');
@@ -76,13 +92,13 @@ function App() {
           <p className="has-background-info-light py-5 has-text-centered">Directions: Find these {3} characters in the image:</p>
           <div className="container p-4">
             {
-              data.hidden_objs.map((char) => <CharacterCard key={char.id} charData={char}/>)
+              characterData.map((char) => <CharacterCard key={char.id} charData={char}/>)
             }
           </div>
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
-          <Dropdown charData={data.hidden_objs} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted} isBottomShift={isBottomShifted}/>
+          <Dropdown charData={characterData} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted} isBottomShift={isBottomShifted}/>
           <img 
             src={data.wimmel_img} 
             ref={imageRef}
