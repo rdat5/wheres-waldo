@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted, isBottomShift } ) {
+function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted, isBottomShift, checkFn } ) {
     const dropDownRef = useRef(null);
 
     const dropdownStyle = {
@@ -15,7 +15,13 @@ function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted, isBot
                 <div className="dropdown-content">
                     {
                         charData.map((char) =>
-                            <div className="dropdown-item level is-clickable" key={char.id}>
+                            <div 
+                                className="dropdown-item level is-clickable" 
+                                key={char.id} 
+                                onClick={() => {
+                                    checkFn(char.id);
+                                }}
+                            >
                                 <img src={char.img} alt="" className="image is-64x64" />
                                 <p>{char.name}</p>
                             </div>

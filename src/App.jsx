@@ -32,6 +32,27 @@ function App() {
     setCharacterData(newCharData);
   }, [])
 
+  function checkClickedCharacter(id) {
+    if (isInHitBox(clickedCoords, characterData[id].hitbox)) {
+      alert('Correct!');
+    }
+    else {
+      alert('Try again.');
+    }
+    setIsCharModalActive(false);
+  }
+
+  function isInHitBox(coordinate, hitbox) {
+    const xDist = Math.abs(coordinate.x - hitbox.x);
+    const yDist = Math.abs(coordinate.y - hitbox.y);
+
+    if (xDist < hitbox.w && yDist < hitbox.h) {
+      return true;
+    }
+
+    return false;
+  }
+
   function onViewHighScoreClick() {
     console.log('view high score.');
     setIsViewScoreActive(true);
@@ -98,7 +119,7 @@ function App() {
         </div>
         {/* Wimmelbilder */}
         <div className="column p-0">
-          <Dropdown charData={characterData} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted} isBottomShift={isBottomShifted}/>
+          <Dropdown charData={characterData} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted} isBottomShift={isBottomShifted} checkFn={checkClickedCharacter}/>
           <img 
             src={data.wimmel_img} 
             ref={imageRef}
