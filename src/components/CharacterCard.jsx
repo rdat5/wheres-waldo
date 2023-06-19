@@ -1,6 +1,6 @@
 function CharacterCard({ charData }) {
     return (
-    <div className= {`card ${charData.isFound ? 'has-background-success' : `has-background-danger`} mb-4`}>
+    <div className= {`card ${charData.isFound ? 'has-background-success' : ``} mb-4`}>
         <div className="card-content p-2">
           <div className="media">
             <div className="media-left">
