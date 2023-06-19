@@ -16,14 +16,14 @@ function Dropdown( { charData, isActive, setIsActive, clickLoc, isShifted, isBot
                     {
                         charData.map((char) =>
                             <div 
-                                className="dropdown-item level is-clickable" 
+                                className={`dropdown-item level ${char.isFound ? 'has-background-success' : 'is-clickable'}`}
                                 key={char.id} 
                                 onClick={() => {
                                     checkFn(char.id);
                                 }}
                             >
                                 <img src={char.img} alt="" className="image is-64x64" />
-                                <p>{char.name}</p>
+                                <p>{char.name} {char.isFound ? '✔️' : ''}</p>
                             </div>
                         )
                     }
