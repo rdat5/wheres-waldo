@@ -36,6 +36,9 @@ function App() {
     if (isInHitBox(clickedCoords, characterData[id].hitbox)) {
       alert('Correct!');
       characterData[id].isFound = true;
+      if (characterData.every(char => char.isFound)) {
+        alert('You win!');
+      }
     }
     else {
       alert('Try again.');
