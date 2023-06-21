@@ -17,6 +17,7 @@ function App() {
   const [characterData, setCharacterData] = useState([]);
   const [timeScore, setTimeScore] = useState(0.0);
   const [gameInProgress, setGameInProgress] = useState(true);
+  const [userName, setUserName] = useState('Anonymous');
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ function App() {
       if (characterData.every(char => char.isFound)) {
         alert('You win!');
         setGameInProgress(false);
+        setIsSubmitModalActive(true);
       }
     }
     else {
@@ -78,11 +80,6 @@ function App() {
   function onViewHighScoreClick() {
     console.log('view high score.');
     setIsViewScoreActive(true);
-  }
-
-  function onSubmitHighScoreClick() {
-    console.log('submit high score.');
-    setIsSubmitModalActive(true);
   }
 
   function isRightHalf(elem, clickLocX) {
@@ -128,8 +125,8 @@ function App() {
             <p className="subtitle is-6 mb-2">Find the hidden characters!</p>
             <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
             <button className="button is-link" onClick={onViewHighScoreClick}>View High Scores</button>
-            <button className="button is-success" onClick={onSubmitHighScoreClick}>Submit High Score</button>
             <p className="is-size-5">Score: <strong>{timeScore.toFixed(2)}s</strong></p>
+            {gameInProgress ? null : <p>Name: {userName}</p>}
           </div>
           {/* Characters */}
           <p className="has-background-info-light py-5 has-text-centered">Directions: Find these {3} characters in the image:</p>
