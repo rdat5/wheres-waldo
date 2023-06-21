@@ -1,4 +1,4 @@
-function Submit( { isActive, setIsActive } ) {
+function Submit( { isActive, setIsActive, timeScore } ) {
     return (
         <div className={`modal ${isActive ? 'is-active' : ''}`}>
             <div className="modal-background"></div>
@@ -11,7 +11,7 @@ function Submit( { isActive, setIsActive } ) {
                         <div className="field">
                             <label className="label">Score</label>
                             <div className="control">
-                                <p className="is-size-2">{20.12} seconds</p>
+                                <p className="is-size-2">{timeScore.toFixed(2)} seconds</p>
                             </div>
                         </div>
                         <label className="label">Name</label>
