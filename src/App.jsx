@@ -15,6 +15,8 @@ function App() {
   const [isShifted, setIsShifted] = useState(false);
   const [isBottomShifted, setIsBottomShifted] = useState(false);
   const [characterData, setCharacterData] = useState([]);
+  const [timeScore, setTimeScore] = useState(0.0);
+  const [gameInProgress, setGameInProgress] = useState(true);
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -32,12 +34,28 @@ function App() {
     setCharacterData(newCharData);
   }, [])
 
+  useEffect(() => {
+    // Set timer
+    let timer = null; 
+
+    if (gameInProgress) {
+      timer = setInterval(() => {
+        setTimeScore((prevSeconds) => prevSeconds + 0.01);
+      }, 10);
+    }
+
+    return () => {
+      clearInterval(timer);
+    }
+  }, [gameInProgress]);
+
   function checkClickedCharacter(id) {
     if (isInHitBox(clickedCoords, characterData[id].hitbox)) {
       alert('Correct!');
       characterData[id].isFound = true;
       if (characterData.every(char => char.isFound)) {
         alert('You win!');
+        setGameInProgress(false);
       }
     }
     else {
@@ -111,7 +129,7 @@ function App() {
             <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
             <button className="button is-link" onClick={onViewHighScoreClick}>View High Scores</button>
             <button className="button is-success" onClick={onSubmitHighScoreClick}>Submit High Score</button>
-            <p className="is-size-5">Score: <em>{20.12}s</em></p>
+            <p className="is-size-5">Score: <strong>{timeScore.toFixed(2)}s</strong></p>
           </div>
           {/* Characters */}
           <p className="has-background-info-light py-5 has-text-centered">Directions: Find these {3} characters in the image:</p>
