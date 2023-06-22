@@ -1,4 +1,8 @@
-function Submit( { isActive, setIsActive, timeScore } ) {
+function Submit( { isActive, setIsActive, timeScore, userName, userNameFn } ) {
+    function handleChange(e) {
+        userNameFn(e.target.value)
+    }
+
     return (
         <div className={`modal ${isActive ? 'is-active' : ''}`}>
             <div className="modal-background"></div>
@@ -17,7 +21,7 @@ function Submit( { isActive, setIsActive, timeScore } ) {
                         <label className="label">Name</label>
                         <div className="field">
                             <div className="control">
-                                <input type="text" className="input" placeholder="Your Name Here"/>
+                                <input type="text" className="input" placeholder="Your Name Here" value={userName} onChange={handleChange}/>
                             </div>
                         </div>
                     </div>

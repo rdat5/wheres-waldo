@@ -157,7 +157,7 @@ function App() {
         </div>
       </div>
       <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive}/>
-      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore}/>
+      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName}/>
     </div>
   )
 }
