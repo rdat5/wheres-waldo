@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { doc, getDoc } from "firebase/firestore";
+import db from './firebase';
 import "./styles/style.css";
 import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
@@ -14,6 +16,7 @@ function App() {
   const [clickedCoords, setClickedCoords] = useState({x: 0, y:0});
   const [isShifted, setIsShifted] = useState(false);
   const [isBottomShifted, setIsBottomShifted] = useState(false);
+  const [wimmelImgPath, setWimmelImgPath] = useState(null);
   const [characterData, setCharacterData] = useState([]);
   const [timeScore, setTimeScore] = useState(0.0);
   const [gameInProgress, setGameInProgress] = useState(true);
@@ -21,6 +24,16 @@ function App() {
   const imageRef = useRef(null);
 
   useEffect(() => {
+    // Load wimmel img path
+    (async () => {
+      const docRef = doc(db, "ad2222", "wimmelbilder");
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        setWimmelImgPath(docSnap.data().image_path);
+      }
+    })();
+
     // Load characters
     const newCharData = data.hidden_objs.map(char => (
         {
@@ -114,6 +127,12 @@ function App() {
     return {x: normalizedX, y: normalizedY};
   }
 
+  if (!wimmelImgPath) {
+    return (
+      <p>Loading...</p>
+    )
+  }
+
   return (
     <div className="has-background-white">
       <div className="columns m-0">
@@ -140,7 +159,7 @@ function App() {
         <div className="column p-0">
           <Dropdown charData={characterData} isActive={isCharModalActive} setIsActive={setIsCharModalActive} clickLoc={clickLocation} isShifted={isShifted} isBottomShift={isBottomShifted} checkFn={checkClickedCharacter}/>
           <img 
-            src={data.wimmel_img} 
+            src={wimmelImgPath} 
             ref={imageRef}
             alt="A.D. 2.222 by Egor Klyuchnyk. A large collage of many characters from multiple pieces of media" 
             className="pure-img p-0" 
