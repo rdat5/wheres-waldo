@@ -149,6 +149,7 @@ function App() {
             <p className="subtitle is-6 mb-2">Find the hidden characters!</p>
             <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
             <button className="button is-link" onClick={onViewHighScoreClick}>View High Scores</button>
+            {gameInProgress ? null : <button className="button is-success" onClick={() => setIsSubmitModalActive(true)}>Submit High Score</button>}
             <p className="is-size-5">Score: <strong>{timeScore.toFixed(2)}s</strong></p>
             {gameInProgress ? null : <p>Name: {userName}</p>}
           </div>
