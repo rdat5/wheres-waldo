@@ -1,12 +1,11 @@
 import { useState, useEffect, useRef } from 'react';
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import db from './firebase';
 import "./styles/style.css";
 import CharacterCard from "./components/CharacterCard";
 import HighScores from "./components/HighScores";
 import Dropdown from './components/DropDown';
 import Submit from "./components/Submit";
-import data from "./placeholder/data.json";
 
 function App() {
   const [isViewModalActive, setIsViewScoreActive] = useState(false);
@@ -34,18 +33,23 @@ function App() {
       }
     })();
 
-    // Load characters
-    const newCharData = data.hidden_objs.map(char => (
-        {
-          id: char.id,
-          name: char.name,
-          img: char.img,
-          origin: char.origin,
-          hitbox: char.hitbox,
+    (async() => {
+      const querySnapshot = await getDocs(collection(db, "ad2222_chars"));
+      const fetchedChars = [];
+      querySnapshot.forEach((doc) => {
+        const docData = doc.data();
+        const newChar = {
+          id: doc.id,
+          name: docData.name,
+          img: docData.img_path,
+          origin: docData.origin,
+          hitbox: {x: docData.x, y: docData.y, w: docData.w, h: docData.h},
           isFound: false
         }
-      ));
-    setCharacterData(newCharData);
+        fetchedChars.push(newChar);
+      });
+      setCharacterData(fetchedChars);
+    })();
   }, [])
 
   useEffect(() => {
@@ -64,9 +68,10 @@ function App() {
   }, [gameInProgress]);
 
   function checkClickedCharacter(id) {
-    if (isInHitBox(clickedCoords, characterData[id].hitbox)) {
+    const charIndex = characterData.findIndex(char => char.id === id);
+    if (isInHitBox(clickedCoords, characterData[charIndex].hitbox)) {
       alert('Correct!');
-      characterData[id].isFound = true;
+      characterData[charIndex].isFound = true;
       if (characterData.every(char => char.isFound)) {
         alert('You win!');
         setGameInProgress(false);
@@ -127,7 +132,7 @@ function App() {
     return {x: normalizedX, y: normalizedY};
   }
 
-  if (!wimmelImgPath) {
+  if (!wimmelImgPath || characterData.length === 0) {
     return (
       <p>Loading...</p>
     )
