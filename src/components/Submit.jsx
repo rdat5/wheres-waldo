@@ -1,7 +1,7 @@
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import db from "../firebase";
 
-function Submit( { isActive, setIsActive, timeScore, userName, userNameFn } ) {
+function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, scoreSubmittedFn } ) {
     function handleChange(e) {
         userNameFn(e.target.value)
     }
@@ -12,6 +12,8 @@ function Submit( { isActive, setIsActive, timeScore, userName, userNameFn } ) {
             score: timeScore,
             submissionDate: Timestamp.fromDate(new Date())
         });
+        scoreSubmittedFn(true);
+        setIsActive(false);
     }
 
     return (
