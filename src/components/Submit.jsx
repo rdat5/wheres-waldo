@@ -8,7 +8,7 @@ function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, score
 
     async function onSubmitClick() {
         await addDoc(collection(db, "high_scores"), {
-            name: "userName",
+            name: userName,
             score: timeScore,
             submissionDate: Timestamp.fromDate(new Date())
         });
