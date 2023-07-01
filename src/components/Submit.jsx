@@ -1,6 +1,17 @@
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import db from "../firebase";
+
 function Submit( { isActive, setIsActive, timeScore, userName, userNameFn } ) {
     function handleChange(e) {
         userNameFn(e.target.value)
+    }
+
+    async function onSubmitClick() {
+        await addDoc(collection(db, "high_scores"), {
+            name: "userName",
+            score: timeScore,
+            submissionDate: Timestamp.fromDate(new Date())
+        });
     }
 
     return (
@@ -27,7 +38,7 @@ function Submit( { isActive, setIsActive, timeScore, userName, userNameFn } ) {
                     </div>
                 </section>
                 <footer className="card-footer">
-                    <button className="button card-footer-item is-success">Submit</button>
+                    <button className="button card-footer-item is-success" onClick={onSubmitClick}>Submit</button>
                     <button className="button card-footer-item is-danger" onClick={() => setIsActive(false)}>Cancel</button>
                 </footer>
             </div>
