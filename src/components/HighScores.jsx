@@ -25,6 +25,7 @@ function HighScores( { isActive, setIsActive } ) {
         });
         // Sort high score list
         fetchedScores.sort((a, b) => (a.scoreTime > b.scoreTime) ? 1 : -1);
+        console.log(fetchedScores);
         setHighScoreList(fetchedScores);
     }
 
@@ -44,10 +45,11 @@ function HighScores( { isActive, setIsActive } ) {
                                 <th>#</th>
                                 <th>Name</th>
                                 <th><abbr title="How long it took to find all hidden characters">Time</abbr></th>
+                                <th>Submitted</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {highScoreList.map((item, index) => <ScoreListItem key={item.id} position={index + 1} name={item.scoreName} score={item.scoreTime}/>)}
+                            {highScoreList.map((item, index) => <ScoreListItem key={item.id} position={index + 1} name={item.scoreName} score={item.scoreTime} date={item.scoreDate}/>)}
                         </tbody>
                     </table>
                 </div>
