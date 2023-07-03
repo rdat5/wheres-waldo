@@ -3,7 +3,7 @@ function ScoreListItem( {position, name, score} ) {
         <tr>
             <th>{position}</th>
             <td>{name}</td>
-            <td>{score}s</td>
+            <td>{score.toFixed(2)}s</td>
         </tr>
     );
 }
