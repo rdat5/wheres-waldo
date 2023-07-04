@@ -21,6 +21,7 @@ function App() {
   const [gameInProgress, setGameInProgress] = useState(true);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const [userName, setUserName] = useState('Anonymous');
+  const [highScoreList, setHighScoreList] = useState([]);
   const imageRef = useRef(null);
 
   useEffect(() => {
@@ -50,6 +51,9 @@ function App() {
         fetchedChars.push(newChar);
       });
       setCharacterData(fetchedChars);
+
+      // Get high scores
+      fetchHighScores()
     })();
   }, [])
 
@@ -139,6 +143,23 @@ function App() {
     )
   }
 
+  async function fetchHighScores() {
+    const querySnapshot = await getDocs(collection(db, "high_scores"));
+    const fetchedScores = [];
+    querySnapshot.forEach((doc) => {
+        const scoreItem = {
+            id: doc.id,
+            scoreName: doc.data().name,
+            scoreTime: doc.data().score,
+            scoreDate: new Date(doc.data().submissionDate.seconds * 1000 + doc.data().submissionDate.nanoseconds/1000000)
+        }
+        fetchedScores.push(scoreItem);
+    });
+    // Sort high score list
+    fetchedScores.sort((a, b) => (a.scoreTime > b.scoreTime) ? 1 : -1);
+    setHighScoreList(fetchedScores);
+}
+
   return (
     <div className="has-background-white">
       <div className="columns m-0">
@@ -182,8 +203,8 @@ function App() {
             }/>
         </div>
       </div>
-      <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive}/>
-      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName} scoreSubmittedFn={setScoreSubmitted}/>
+      <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive} scores={highScoreList}/>
+      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName} scoreSubmittedFn={setScoreSubmitted} scoreFetchFn={fetchHighScores}/>
     </div>
   )
 }
