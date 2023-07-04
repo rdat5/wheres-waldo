@@ -1,13 +1,13 @@
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import db from "../firebase";
 
-function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, scoreSubmittedFn, scoreFetchFn, setViewActiveFn } ) {
+function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, scoreSubmittedFn, scoreFetchFn, setViewActiveFn, setScoreidFn } ) {
     function handleChange(e) {
         userNameFn(e.target.value)
     }
 
     async function onSubmitClick() {
-        await addDoc(collection(db, "high_scores"), {
+        const docRef = await addDoc(collection(db, "high_scores"), {
             name: userName,
             score: timeScore,
             submissionDate: Timestamp.fromDate(new Date())
@@ -16,6 +16,7 @@ function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, score
         setIsActive(false);
         scoreFetchFn();
         setViewActiveFn(true);
+        setScoreidFn(docRef.id);
     }
 
     return (

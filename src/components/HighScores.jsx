@@ -1,6 +1,6 @@
 import ScoreListItem from "./ScoreListItem";
 
-function HighScores( { isActive, setIsActive, scores } ) {
+function HighScores( { isActive, setIsActive, scores, userScoreId } ) {
     return (
         <div className={`modal ${isActive ? 'is-active' : ''}`}>
             <div className="modal-background"></div>
@@ -21,7 +21,7 @@ function HighScores( { isActive, setIsActive, scores } ) {
                             </tr>
                         </thead>
                         <tbody>
-                            {scores.map((item, index) => <ScoreListItem key={item.id} position={index + 1} name={item.scoreName} score={item.scoreTime} date={item.scoreDate}/>)}
+                            {scores.map((item, index) => <ScoreListItem key={item.id} scoreId={item.id} position={index + 1} name={item.scoreName} score={item.scoreTime} date={item.scoreDate} userScoreId={userScoreId}/>)}
                         </tbody>
                     </table>
                 </div>

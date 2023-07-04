@@ -21,6 +21,7 @@ function App() {
   const [gameInProgress, setGameInProgress] = useState(true);
   const [scoreSubmitted, setScoreSubmitted] = useState(false);
   const [userName, setUserName] = useState('Anonymous');
+  const [userScoreId, setUseScoreId] = useState('');
   const [highScoreList, setHighScoreList] = useState([]);
   const imageRef = useRef(null);
 
@@ -203,8 +204,8 @@ function App() {
             }/>
         </div>
       </div>
-      <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive} scores={highScoreList}/>
-      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName} scoreSubmittedFn={setScoreSubmitted} scoreFetchFn={fetchHighScores} setViewActiveFn={setIsViewScoreActive}/>
+      <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive} scores={highScoreList} userScoreId={userScoreId}/>
+      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName} scoreSubmittedFn={setScoreSubmitted} scoreFetchFn={fetchHighScores} setViewActiveFn={setIsViewScoreActive} setScoreidFn={setUseScoreId}/>
     </div>
   )
 }

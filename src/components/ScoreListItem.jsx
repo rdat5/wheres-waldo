@@ -1,6 +1,6 @@
-function ScoreListItem( {position, name, score, date} ) {
+function ScoreListItem( {scoreId, position, name, score, date, userScoreId} ) {
     return (
-        <tr>
+        <tr className={scoreId === userScoreId ? "is-selected" : ''}>
             <th>{position}</th>
             <td>{name}</td>
             <td>{score.toFixed(2)} seconds(s)</td>
