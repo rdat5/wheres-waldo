@@ -205,7 +205,7 @@ function App() {
         </div>
       </div>
       <HighScores isActive={isViewModalActive} setIsActive={setIsViewScoreActive} scores={highScoreList} userScoreId={userScoreId}/>
-      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName} scoreSubmittedFn={setScoreSubmitted} scoreFetchFn={fetchHighScores} setViewActiveFn={setIsViewScoreActive} setScoreidFn={setUseScoreId}/>
+      <Submit isActive={isSubmitModalActive} setIsActive={setIsSubmitModalActive} timeScore={timeScore} userName={userName} userNameFn={setUserName} scoreSubmittedFn={setScoreSubmitted} scoreFetchFn={fetchHighScores} setViewActiveFn={setIsViewScoreActive} setScoreidFn={setUseScoreId} highScoreList={highScoreList}/>
     </div>
   )
 }

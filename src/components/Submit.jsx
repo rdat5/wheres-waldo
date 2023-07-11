@@ -1,7 +1,7 @@
-import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp, doc, deleteDoc } from "firebase/firestore";
 import db from "../firebase";
 
-function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, scoreSubmittedFn, scoreFetchFn, setViewActiveFn, setScoreidFn } ) {
+function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, scoreSubmittedFn, scoreFetchFn, setViewActiveFn, setScoreidFn, highScoreList } ) {
     function handleChange(e) {
         userNameFn(e.target.value)
     }
@@ -14,6 +14,14 @@ function Submit( { isActive, setIsActive, timeScore, userName, userNameFn, score
         });
         scoreSubmittedFn(true);
         setIsActive(false);
+
+        // Remove lowest score
+
+        scoreFetchFn();
+        const lowestScoreID = highScoreList[highScoreList.length - 1].id;
+        await deleteDoc(doc(db, "high_scores", lowestScoreID));
+
+        // Update scorelist
         scoreFetchFn();
         setViewActiveFn(true);
         setScoreidFn(docRef.id);
