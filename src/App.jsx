@@ -170,7 +170,8 @@ function App() {
           <div className="has-text-centered p-4 pt-5">
             <p className="title is-5">Where&apos;s [Waldo]?</p>
             <p className="subtitle is-6 mb-2">Find the hidden characters!</p>
-            <p className="is-size-7 mb-4">By Ray Allen Datuin 2023</p>
+            <p className="is-size-7 mb-2">By Ray Allen Datuin 2023</p>
+            <p className="is-size-6 mb-4"><strong>A.D. 2.222</strong> by Egor Klyuchnyk</p>
             <button className="button is-link" onClick={onViewHighScoreClick}>View High Scores</button>
             {(!gameInProgress && !scoreSubmitted) ? <button className="button is-success" onClick={() => setIsSubmitModalActive(true)}>Submit High Score</button> : null}
             <p className="is-size-5">Score: <strong>{timeScore.toFixed(2)}s</strong></p>
