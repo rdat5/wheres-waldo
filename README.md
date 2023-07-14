@@ -6,7 +6,7 @@ For the Odin Project. This is a game where the user attempts to correctly identi
 
 ## Tech Stack
 
-Vite, React, BulmaCSS, Firebase
+Vite, React, Bulma, Firebase
 
 
 ## Screenshots
